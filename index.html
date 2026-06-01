@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essia · Consultório Médico</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F5F0E8;--beige:#E8DDD0;--sand:#C9B8A4;--brown:#3D2B1F;--brown-mid:#6B4C3B;--brown-dark:#2A1A10;--text:#3D2B1F;--text-light:#8A7060}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(245,240,232,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid rgba(61,43,31,0.1)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo img{width:24px;height:24px;object-fit:contain}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;letter-spacing:0.05em;color:var(--brown)}
+.logo-sub{font-size:0.55rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);display:block;margin-top:-3px}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:0.7rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--brown)}
+.nav-cta{background:var(--brown)!important;color:var(--cream)!important;padding:0.55rem 1.3rem;border-radius:2px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--brown);transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(245,240,232,0.98);backdrop-filter:blur(12px);padding:1.5rem 2rem;border-bottom:0.5px solid rgba(61,43,31,0.1);z-index:99;flex-direction:column;gap:1.2rem}
+.mobile-menu a{font-size:0.8rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);text-decoration:none}
+.mobile-menu.open{display:flex}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:62px}
+.hero-left{background:var(--brown-dark);display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem;position:relative;overflow:hidden}
+.hero-left::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 60%,rgba(201,184,164,0.08) 0%,transparent 60%)}
+.hero-eyebrow{font-size:0.62rem;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--sand);margin-bottom:2rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4.5vw,4.5rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:2rem}
+.hero-title em{font-style:italic;color:var(--sand)}
+.hero-desc{font-size:0.82rem;font-weight:300;line-height:1.8;color:rgba(245,240,232,0.6);max-width:380px;margin-bottom:2.5rem}
+.btn-primary{display:inline-block;background:var(--cream);color:var(--brown);padding:0.85rem 2rem;font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s;width:fit-content}
+.btn-primary:hover{background:var(--sand)}
+.hero-right{background:var(--beige);display:flex;flex-direction:column;justify-content:flex-end;padding:4rem;position:relative}
+.hero-tags{position:absolute;top:4rem;left:4rem;display:flex;flex-direction:column;gap:0.75rem}
+.hero-tag{font-size:0.62rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';width:18px;height:0.5px;background:var(--sand);display:block}
+.hero-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.5vw,2.6rem);font-weight:300;font-style:italic;line-height:1.3;color:var(--brown);margin-bottom:0.8rem}
+.hero-quote-attr{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light)}
+.sobre{padding:6rem 3rem;display:grid;grid-template-columns:60px 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+.section-label{font-size:0.62rem;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-light);writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);height:fit-content;align-self:flex-start;margin-top:8px}
+.sobre-content h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:300;line-height:1.2;color:var(--brown);margin-bottom:1.5rem}
+.sobre-content p{font-size:0.87rem;font-weight:300;line-height:1.9;color:var(--text-light);max-width:600px;margin-bottom:1.2rem}
+.divider{width:40px;height:0.5px;background:var(--sand);margin:1.8rem 0}
+.sobre-values{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;padding-top:2rem;border-top:0.5px solid rgba(61,43,31,0.15)}
+.value-item h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--brown);margin-bottom:0.4rem}
+.value-item p{font-size:0.75rem;line-height:1.7;color:var(--text-light);margin:0}
+.especialidades{background:var(--brown-dark);padding:6rem 3rem}
+.especialidades-inner{max-width:1200px;margin:0 auto}
+.especialidades-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
+.especialidades-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:300;color:var(--cream);line-height:1.2}
+.especialidades-header p{font-size:0.75rem;font-weight:300;letter-spacing:0.1em;color:var(--sand);max-width:260px;text-align:right;line-height:1.7}
+.esp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.05)}
+.esp-card{background:var(--brown-dark);padding:2.5rem 2rem;transition:background 0.4s}
+.esp-card:hover{background:rgba(255,255,255,0.04)}
+.esp-number{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(201,184,164,0.2);display:block;margin-bottom:1.2rem;line-height:1}
+.esp-card h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;font-weight:300;color:var(--cream);margin-bottom:0.8rem}
+.esp-card p{font-size:0.78rem;font-weight:300;line-height:1.8;color:rgba(245,240,232,0.5)}
+.medicos{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.medicos-header{margin-bottom:3rem}
+.medicos-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:300;color:var(--brown);margin-bottom:0.4rem}
+.medicos-header p{font-size:0.78rem;color:var(--text-light);font-weight:300}
+.medicos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.medico-card{border-top:0.5px solid rgba(61,43,31,0.2);padding-top:1.5rem}
+.medico-avatar{width:52px;height:52px;border-radius:50%;background:var(--beige);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown-mid);font-style:italic}
+.medico-card h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--brown);margin-bottom:0.25rem;line-height:1.3}
+.medico-esp{font-size:0.65rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:var(--sand);display:block;margin-bottom:0.7rem}
+.medico-card p{font-size:0.75rem;font-weight:300;line-height:1.7;color:var(--text-light)}
+.contato{background:var(--beige);padding:6rem 3rem}
+.contato-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.contato h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,3.5rem);font-weight:300;color:var(--brown);line-height:1.2;margin-bottom:1.2rem}
+.contato h2 em{font-style:italic}
+.contato-desc{font-size:0.85rem;font-weight:300;line-height:1.9;color:var(--text-light);margin-bottom:2rem}
+.btn-dark{display:inline-block;background:var(--brown);color:var(--cream);padding:0.85rem 2rem;font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s}
+.btn-dark:hover{background:var(--brown-mid)}
+.contato-info{display:flex;flex-direction:column;gap:1.8rem}
+.info-item label{font-size:0.58rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);display:block;margin-bottom:0.35rem}
+.info-item p{font-size:0.87rem;font-weight:300;color:var(--brown);line-height:1.6}
+footer{background:var(--brown-dark);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--cream);letter-spacing:0.05em}
+.footer-copy{font-size:0.62rem;font-weight:300;letter-spacing:0.1em;color:rgba(245,240,232,0.3)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp 0.8s 0.1s ease forwards;opacity:0}
+.hero-title{animation:fadeUp 0.8s 0.2s ease forwards;opacity:0}
+.hero-desc{animation:fadeUp 0.8s 0.3s ease forwards;opacity:0}
+.btn-primary{animation:fadeUp 0.8s 0.4s ease forwards;opacity:0}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:4rem 2rem 3rem;min-height:60vh}
+  .hero-right{padding:3rem 2rem;min-height:40vh}
+  .hero-tags{position:static;flex-direction:row;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem}
+  .hero-quote{font-size:1.8rem}
+  .sobre{grid-template-columns:1fr;gap:1rem;padding:4rem 1.5rem}
+  .section-label{writing-mode:horizontal-tb;transform:none;margin-bottom:0.5rem}
+  .sobre-values{grid-template-columns:1fr;gap:1.5rem}
+  .especialidades{padding:4rem 1.5rem}
+  .especialidades-header{flex-direction:column;align-items:flex-start;gap:1rem}
+  .especialidades-header p{text-align:left;max-width:100%}
+  .esp-grid{grid-template-columns:1fr}
+  .medicos{padding:4rem 1.5rem}
+  .medicos-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .contato{padding:4rem 1.5rem}
+  .contato-inner{grid-template-columns:1fr;gap:3rem}
+  footer{flex-direction:column;gap:0.8rem;text-align:center;padding:1.5rem}
+}
+@media(max-width:480px){
+  .medicos-grid{grid-template-columns:1fr}
+  .hero-left{padding:3.5rem 1.5rem 2.5rem}
+  .hero-right{padding:2.5rem 1.5rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo">
+    <img src="https://clinicaessia.lovable.app/__l5e/assets-v1/af815683-a3c2-4896-84f8-fdd5cdee445b/simbolo_escuro.png" alt="Essia" onerror="this.style.display='none'">
+    <div><span class="logo-text">essia</span><span class="logo-sub">consultório médico</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#contato" class="nav-cta">Agendar</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+  <a href="#especialidades" onclick="toggleMenu()">Especialidades</a>
+  <a href="#equipe" onclick="toggleMenu()">Equipe</a>
+  <a href="#contato" onclick="toggleMenu()">Agendar consulta</a>
+</div>
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Moinhos de Vento · Porto Alegre</span>
+    <h1 class="hero-title">seu corpo<br>tem <em>história.</em><br>queremos<br>ouvi-la.</h1>
+    <p class="hero-desc">Um consultório médico pensado em cada detalhe, onde o cuidado começa na escuta e o tratamento respeita a singularidade de cada pessoa.</p>
+    <a href="#contato" class="btn-primary">Agendar consulta</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-tags">
+      <span class="hero-tag">Ginecologia</span>
+      <span class="hero-tag">Obstetrícia</span>
+      <span class="hero-tag">Urologia</span>
+      <span class="hero-tag">Particular</span>
+    </div>
+    <p class="hero-quote">"essência<br>no cuidado."</p>
+    <span class="hero-quote-attr">Essia · Consultório Médico</span>
+  </div>
+</section>
+<section class="sobre" id="sobre">
+  <span class="section-label">Sobre</span>
+  <div class="sobre-content">
+    <h2>Medicina com<br>olhar <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">integral</em></h2>
+    <p>A Essia nasceu da crença de que o cuidado médico precisa ser mais do que técnico — precisa ser humano. Nosso consultório foi pensado para ser um espaço de acolhimento, onde cada paciente é ouvida com atenção e tratada com respeito à sua história.</p>
+    <p>Localizada na Galeria Quinta Avenida, no coração de Moinhos de Vento, a Essia reúne profissionais com formação de excelência e compromisso com um atendimento baseado em evidências e decisões compartilhadas.</p>
+    <div class="divider"></div>
+    <div class="sobre-values">
+      <div class="value-item"><h4>Escuta ativa</h4><p>Cada consulta começa pelo que você tem a dizer.</p></div>
+      <div class="value-item"><h4>Evidência</h4><p>Diagnósticos e tratamentos baseados na melhor ciência disponível.</p></div>
+      <div class="value-item"><h4>Integralidade</h4><p>Cuidado que considera corpo, mente e história de vida.</p></div>
+    </div>
+  </div>
+</section>
+<section class="especialidades" id="especialidades">
+  <div class="especialidades-inner">
+    <div class="especialidades-header">
+      <h2>Nossas<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;">especialidades</em></h2>
+      <p>Atendimento particular com hora marcada. Presencial e online.</p>
+    </div>
+    <div class="esp-grid">
+      <div class="esp-card"><span class="esp-number">01</span><h3>Ginecologia</h3><p>Saúde da mulher em todas as fases da vida. Consulta de rotina, saúde hormonal, planejamento contraceptivo, menopausa e TRH.</p></div>
+      <div class="esp-card"><span class="esp-number">02</span><h3>Obstetrícia</h3><p>Acompanhamento pré-natal humanizado, com suporte contínuo durante toda a gestação e preparo para o parto.</p></div>
+      <div class="esp-card"><span class="esp-number">03</span><h3>Urologia</h3><p>Cuidado especializado e individualizado do sistema urinário e saúde masculina, com abordagem completa e humanizada.</p></div>
+    </div>
+  </div>
+</section>
+<section class="medicos" id="equipe">
+  <div class="medicos-header">
+    <h2>Nossa equipe</h2>
+    <p>Profissionais com formação de excelência e compromisso com o cuidado humanizado</p>
+  </div>
+  <div class="medicos-grid">
+    <div class="medico-card"><div class="medico-avatar">L</div><h3>Dra. Laetitia Trindade</h3><span class="medico-esp">Ginecologia · Obstetrícia</span><p>Ginecologista e obstetra formada pela Santa Casa de Porto Alegre, com especialização em Ginecologia Endócrina. Atua com terapia hormonal, anticoncepção e saúde da mulher.</p></div>
+    <div class="medico-card"><div class="medico-avatar">L</div><h3>Dr. Leonardo Lanes da Silveira</h3><span class="medico-esp">Urologia</span><p>Urologista formado pela Santa Casa de Porto Alegre, cirurgião robótico e membro da Sociedade Brasileira de Urologia.</p></div>
+    <div class="medico-card"><div class="medico-avatar">V</div><h3>Dra. Vanessa de Mello Terroso</h3><span class="medico-esp">Obstetrícia</span><p>Ginecologista e obstetra formada pela PUCRS, com foco em acompanhamento pré-natal, assistência ao parto e saúde da mulher.</p></div>
+    <div class="medico-card"><div class="medico-avatar">H</div><h3>Dra. Helena Mansur</h3><span class="medico-esp">Ginecologia · Obstetrícia</span><p>Ginecologista e obstetra formada pela Santa Casa de Porto Alegre, com especialização em Ginecologia Endócrina. Mestranda pela UFCSPA.</p></div>
+  </div>
+</section>
+<section class="contato" id="contato">
+  <div class="contato-inner">
+    <div>
+      <h2>Agende sua<br><em>consulta</em></h2>
+      <p class="contato-desc">Estamos à disposição para cuidar de você com a atenção e o respeito que você merece. Entre em contato pelo WhatsApp para agendar sua consulta.</p>
+      <a href="https://wa.me/5551991126501?text=Olá!%20Gostaria%20de%20informações%20sobre%20consultas." class="btn-dark" target="_blank">Agendar pelo WhatsApp</a>
+    </div>
+    <div class="contato-info">
+      <div class="info-item"><label>Endereço</label><p>Rua 24 de Outubro, 111 — Sala 1004<br>Galeria Quinta Avenida<br>Moinhos de Vento · Porto Alegre</p></div>
+      <div class="info-item"><label>Estacionamento</label><p>Rua Mostardeiro, 120</p></div>
+      <div class="info-item"><label>Atendimento</label><p>Presencial e online<br>Particular · Sem planos de saúde</p></div>
+      <div class="info-item"><label>Instagram</label><p>@essia.consultorio</p></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <span class="footer-logo">essia</span>
+  <span class="footer-copy">© 2026 Essia Consultório Médico · Moinhos de Vento · Porto Alegre</span>
+</footer>
+<script>
+function toggleMenu(){const m=document.getElementById('mobileMenu');m.classList.toggle('open')}
+document.addEventListener('click',function(e){const m=document.getElementById('mobileMenu');if(!e.target.closest('nav')&&!e.target.closest('#mobileMenu')){m.classList.remove('open')}});
+</script>
+</body>
+</html>
